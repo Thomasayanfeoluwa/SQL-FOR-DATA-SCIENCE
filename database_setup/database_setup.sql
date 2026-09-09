@@ -1,3 +1,7 @@
+DROP TABLE IF EXISTS employee;
+DROP TABLE IF EXISTS regions;
+DROP TABLE IF EXISTS departments;
+
 CREATE TABLE departments(
 	department VARCHAR(100),
 	division VARCHAR(100),
@@ -11,7 +15,7 @@ CREATE TABLE regions (
 	PRIMARY KEY(region_id)
 );
 
-CREATE TABLE employee(
+CREATE TABLE employees(
 	employee_id INT,
 	first_name VARCHAR(50),
 	last_name VARCHAR(50),
@@ -59,8 +63,6 @@ INSERT INTO departments VALUES ('Plumbing', 'Hardware');
 INSERT INTO departments VALUES ('Security', 'Services');
 INSERT INTO departments VALUES ('Camping', 'Outdoors');
 
-SELECT * 
-FROM departments
 
 
 INSERT INTO regions VALUES (1, 'Southwest', 'America');
@@ -71,11 +73,7 @@ INSERT INTO regions VALUES (5, 'Coastal', 'West Africa');
 INSERT INTO regions VALUES (6, 'Quebec', 'America');
 INSERT INTO regions VALUES (7, 'Nova Scotia', 'America');
 
-SELECT *
-FROM regions
 
-
-ALTER TABLE employee RENAME TO employees;
 
 INSERT INTO employees VALUES (1, 'Berrie', 'Manueau', 'bmanueau0@dion.ne.jp', '2006-04-20', 'Sports', 'F', 154864, 4);
 INSERT INTO employees VALUES (2, 'Aeriell', 'McNee', 'amcnee1@google.es', '2009-01-26', 'Tools', 'F', 56752, 3);
@@ -1079,9 +1077,6 @@ INSERT INTO employees VALUES (999, 'Kingston', 'Piwall', 'kpiwallrq@nyu.edu', '2
 INSERT INTO employees VALUES (1000, 'Jacquelin', 'Cassam', 'jcassamrr@cam.ac.uk', '2010-01-27', 'Music', 'F', 28726, 2);
 
 
-
-
-SELECT * FROM employees
 
 
 
