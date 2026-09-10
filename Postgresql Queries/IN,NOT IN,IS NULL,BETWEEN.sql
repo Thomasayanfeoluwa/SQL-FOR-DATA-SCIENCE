@@ -1,22 +1,5 @@
 SELECT *
 FROM employees
-WHERE 
-    department = 'Tools'
-    AND region_id = 3
-    -- AND salary > 50000
-    OR salary > 100000
-    
-
-SELECT * 
-FROM employees
-WHERE
-    department = 'Beauty'
-    AND(region_id = 3
-    OR salary > 50000)
-
-
-SELECT *
-FROM employees
 WHERE
     department IN ('Sports', 'Clothing')
 
@@ -43,3 +26,16 @@ WHERE email IS NULL
 SELECT *
 FROM employees
 WHERE email IS NOT NULL
+
+
+SELECT *
+FROM employees
+WHERE department
+    IN ('Sport', 'Clothing', 'Movies', 'Outdoors', 'Toys', 'Tools')
+
+
+
+SELECT *
+FROM employees
+WHERE salary BETWEEN 50000 AND 100000
+
