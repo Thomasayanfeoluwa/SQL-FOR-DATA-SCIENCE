@@ -4,6 +4,7 @@ CREATE TABLE students(
 	age INT
 );
 
+--INSET THE VALUES INSIDE THE STUDENTS TABLE
 INSERT INTO students VALUES (1, 'Michael', 19);
 INSERT INTO students VALUES (2, 'Doug', 18);
 INSERT INTO students VALUES (3, 'Samantha', 21);
