@@ -1,4 +1,4 @@
-CREATE TABLE student.students(
+CREATE TABLE students(
 	student_no INT,
 	student_name VARCHAR(20),
 	age INT
@@ -16,7 +16,7 @@ INSERT INTO students VALUES (9, 'Rand', 17);
 INSERT INTO students VALUES (10, 'Sylvia', 20);
 
 
-CREATE TABLE courses.student(
+CREATE TABLE courses(
 	course_no VARCHAR(5),
 	course_title VARCHAR(20),
 	credits INT
@@ -29,7 +29,7 @@ INSERT INTO courses VALUES ('CS210', 'Art History', 3);
 INSERT INTO courses VALUES ('CS220', 'US History', 3);
 
 
-CREATE TABLE student_enrollment.student(
+CREATE TABLE student_enrollment(
 	student_no INT,
 	course_no VARCHAR(5)
 );
@@ -51,7 +51,7 @@ INSERT INTO student_enrollment VALUES (7, 'CS110');
 INSERT INTO student_enrollment VALUES (7, 'CS210');
 
 
-CREATE TABLE professors.student(
+CREATE TABLE professors(
 	last_name VARCHAR(20),
 	department VARCHAR(12),
 	salary INT,
@@ -66,7 +66,7 @@ INSERT INTO professors VALUES ('Miller', 'Agriculture', 82000, '2008-05-08');
 INSERT INTO professors VALUES ('Williams', 'Law', 105000, '2001-06-05');
 
 
-CREATE TABLE teach.student(
+CREATE TABLE teach(
 	last_name VARCHAR(20),
 	course_no VARCHAR(5)
 );
