@@ -20,3 +20,7 @@ SELECT DISTINCT department
 FROM employees
 ORDER BY department
 LIMIT 5
+
+SELECT DISTINCT department AS sorted_departments
+FROM employees
+ORDER BY department
