@@ -15,12 +15,30 @@ SELECT DISTINCT department
 FROM employees
 ORDER BY department
 
--- Return the distinct departments of employees in the employees table, ordered alphabetically, and limit the results to 5 rows.
+-- Return the distinct departments of employees in the employees table, ordered alphabetically, 
+-- and limit the results to 5 rows.
 SELECT DISTINCT department
 FROM employees
 ORDER BY department
 LIMIT 5
 
+-- Return the distinct departments of employees in the employees table, ordered alphabetically, 
+-- and rename the column to sorted_departments.
 SELECT DISTINCT department AS sorted_departments
 FROM employees
 ORDER BY department
+
+
+SELECT
+    first_name || ' ' || last_name AS "Full Name", 
+    department, salary 
+FROM employees
+ORDER BY department
+
+
+SELECT
+    first_name AS "First Name",
+    last_name AS "Last Name",
+    department AS "Department",
+    salary AS "Salary"
+FROM employees
