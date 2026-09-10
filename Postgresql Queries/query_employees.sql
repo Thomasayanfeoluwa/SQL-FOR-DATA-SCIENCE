@@ -32,3 +32,14 @@ SELECT *
 FROM employees
 WHERE
     department <> 'Movies'
+
+
+
+SELECT *
+FROM employees
+WHERE email IS NULL
+
+
+SELECT *
+FROM employees
+WHERE email IS NOT NULL
