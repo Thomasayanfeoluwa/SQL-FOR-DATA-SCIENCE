@@ -37,3 +37,7 @@ FROM employees
 SELECT SUM(salary)
 FROM employees
 WHERE department = 'Tools'
+
+SELECT SUM(salary)
+FROM employees
+WHERE department = 'Children Clothing'
