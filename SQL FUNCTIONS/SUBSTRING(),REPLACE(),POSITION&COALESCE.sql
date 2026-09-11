@@ -16,26 +16,28 @@ SELECT department,
     REPLACE(department, 'Clothing', 'Apparel') AS "Replaced Department"
 FROM employees
 
--- QUERY 3: Using POSITION() to find the position of a substring within a string
+-- QUERY 3: Combining two rows in department together
+SELECT department, 
+    REPLACE(department, 'Clothing', 'Apparel') AS "Replaced Department",
+        department || ' department ' AS "Full Department Name"
+FROM employees
+
+-- QUERY 4: Using POSITION() to find the position of a substring within a string
 SELECT department,
     POSITION('o' IN department) AS "Position of o in Department"
 FROM employees
 
--- QUERY 4: Using COALESCE() to handle NULL values
+-- QUERY 5: Using POSITION() to find the position of @ substring within a string
+SELECT department,
+    POSITION('@' IN email) AS "Postion of @ in Email"
+FROM employees
+
+-- QUERY 6: Using COALESCE() to handle NULL values
 SELECT department,
     COALESCE(email, 'No Email') AS "Email"
 FROM employees
 
-
-SELECT department, 
-REPLACE(department, 'Clothing', 'Apparel') AS "Replaced Department",
-    department || ' department ' 
-FROM employees
-
-
-
-
--- QUERY 5: Combining SUBSTRING(), REPLACE(), POSITION(), and COALESCE() in a single query
+-- QUERY 7: Combining SUBSTRING(), REPLACE(), POSITION(), and COALESCE() in a single query
 SELECT SUBSTRING(first_name, 1, 3) AS "First 3 Letters", 
     REPLACE(last_name, 'a', 'A') AS "Replaced Last Name",
     POSITION('a' IN last_name) AS "Position of a in Last Name",
