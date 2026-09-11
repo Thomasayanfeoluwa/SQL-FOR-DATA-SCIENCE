@@ -27,7 +27,15 @@ SELECT department,
 FROM employees
 
 
+SELECT department, 
+REPLACE(department, 'Clothing', 'Apparel') AS "Replaced Department",
+    department || ' department ' 
+FROM employees
 
+
+
+
+-- QUERY 5: Combining SUBSTRING(), REPLACE(), POSITION(), and COALESCE() in a single query
 SELECT SUBSTRING(first_name, 1, 3) AS "First 3 Letters", 
     REPLACE(last_name, 'a', 'A') AS "Replaced Last Name",
     POSITION('a' IN last_name) AS "Position of a in Last Name",
