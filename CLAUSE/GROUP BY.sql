@@ -68,6 +68,7 @@ ORDER BY COUNT(*) DESC
 
 
 
+
 SELECT gender, region_id, MIN(salary) AS min_salary, 
     MAX(salary) AS max_salry, ROUND(AVG(salary) AS avg_salary)
 FROM employees
