@@ -42,3 +42,7 @@ GROUP BY department, gender
 ORDER BY department;
 
 
+SELECT department, COUNT(last_name) AS "Employer Count"
+FROM employees
+GROUP BY department
+ORDER BY department
