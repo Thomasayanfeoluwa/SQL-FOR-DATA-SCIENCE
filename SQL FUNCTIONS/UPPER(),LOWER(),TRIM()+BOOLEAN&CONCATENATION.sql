@@ -11,4 +11,16 @@ SELECT TRIM('  HELLO THERE  ')
 SELECT LENGTH(TRIM('  HELLO THERE  '))
 
 
-SELECT
+
+-- Concatenating strings
+SELECT 
+    first_name || last_name
+FROM employees
+
+
+SELECT first_name || ' ' || last_name AS "Full Name", department, salary
+FROM employees
+
+-- Boolean expressions
+SELECT first_name || ' ' || last_name AS "Full Name", department, LENGTH(salary > 100000) AS "High Salary"
+FROM employees
