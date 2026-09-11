@@ -2,10 +2,11 @@ SELECT department, COUNT(*)
 FROM employees
 GROUP BY department
 HAVING COUNT(*) > 35
-ORDER BY department
+ORDER BY department;
 
 
-SELECT department, salary, gender
+SELECT department, gender, salary
 FROM employees
-GROUP BY department
-HAVING 
+GROUP BY department, gender
+HAVING salary > 90000
+ORDER BY salary;
