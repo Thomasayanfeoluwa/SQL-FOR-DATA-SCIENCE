@@ -5,9 +5,9 @@ HAVING COUNT(*) > 35
 ORDER BY department;
 
 
-SELECT department, gender, salary
-FROM employees
-GROUP BY department, gender
-HAVING department = 2
+SELECT department, gender, AVG(salary) AS "Average Salary"
+FROM employees 
+GROUP BY department, gender 
+HAVING AVG(salary)
 ORDER BY salary;
 
