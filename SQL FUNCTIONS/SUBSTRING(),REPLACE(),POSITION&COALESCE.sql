@@ -11,6 +11,14 @@ SELECT department,
     SUBSTRING(department, 1, 3) AS "First 3 Letters"
 FROM employees
 
+SELECT department,
+    SUBSTRING(email, POSITION ('@' IN email)) AS "Letters from @ in Email"
+FROM employees
+
+SELECT department,
+    SUBSTRING(email, POSITION ('@' IN email) + 1) AS "Letters after @ in Email"
+FROM employees
+
 -- QUERY 2: Using REPLACE() to replace a substring within a string
 SELECT department, 
     REPLACE(department, 'Clothing', 'Apparel') AS "Replaced Department"
