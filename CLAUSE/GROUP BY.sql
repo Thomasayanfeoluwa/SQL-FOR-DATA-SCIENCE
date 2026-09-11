@@ -58,11 +58,14 @@ SELECT DISTINCT department
 FROM employees
 
 
-SELECT SUBSTRING(email, POSITION ('@' IN email) + 1) AS "Email Domain", COUNT(*)
+SELECT SUBSTRING(email, POSITION ('@' IN email) + 1)
+    AS "Email Domain", COUNT(*)
 FROM employees
 WHERE email IS NOT NULL
 GROUP BY "Email Domain"
 ORDER BY COUNT(*) DESC
+
+
 
 
 SELECT gender, region_id, MIN(salary) AS min_salary, 
