@@ -42,7 +42,16 @@ GROUP BY department, gender
 ORDER BY department;
 
 
-SELECT department, COUNT(last_name) AS "Employer Count"
+SELECT first_name, count(*)
+FROM employees
+GROUP BY first_name
+HAVING COUNT(*) > 2
+
+
+SELECT department
 FROM employees
 GROUP BY department
-ORDER BY department
+
+
+SELECT DISTINCT department
+FROM employees
