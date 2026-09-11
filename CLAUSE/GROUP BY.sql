@@ -40,3 +40,5 @@ SELECT department, gender, COUNT(*)
 FROM employees
 GROUP BY department, gender
 ORDER BY department;
+
+
