@@ -65,4 +65,6 @@ GROUP BY "Email Domain"
 ORDER BY COUNT(*) DESC
 
 
-SELECT gender, region_id, 
+SELECT gender, region_id, min_salary, max_salry, avg_salary
+FROM employees
+ORDER BY gender
