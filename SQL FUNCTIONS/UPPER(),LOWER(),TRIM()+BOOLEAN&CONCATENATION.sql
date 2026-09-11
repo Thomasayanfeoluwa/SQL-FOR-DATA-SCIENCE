@@ -27,6 +27,9 @@ FROM employees
 ORDER BY salary DESC
 
 
-SELECT department ('Clothing' IN ('Sports', 'Clothing', 'Movies', 'Outdoors', 'Toys', 'Tools')) AS "Department"
+SELECT department, ('Clothing' IN (department)) AS "In Clothing Department"
+FROM employees
 
 
+SELECT department, (department LIKE '%oth%') AS "Contains oth"
+FROM employees
