@@ -37,3 +37,6 @@ FROM employees
 SELECT department, (department LIKE '%oth%') AS "Contains oth"
 FROM employees
 
+SELECT *
+FROM employees
+WHERE department LIKE '__ol_'
