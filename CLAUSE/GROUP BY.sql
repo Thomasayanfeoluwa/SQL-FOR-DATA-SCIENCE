@@ -16,13 +16,13 @@ GROUP BY department;
 SELECT department,
     COUNT(employee_id)
 FROM employees
-GROUP BY department
+GROUP BY department;
 
 SELECT department,
     COUNT(*) AS "Employee Count"
 FROM employees
 GROUP BY department
-ORDER BY department
+ORDER BY department;
 
 
 SELECT department,
@@ -33,7 +33,7 @@ SELECT department,
 FROM employees
 WHERE salary > 75000
 GROUP BY department
-ORDER BY total_number_of_employees DESC
+ORDER BY total_number_of_employees DESC;
 
 
 SELECT department, gender, COUNT(*)
