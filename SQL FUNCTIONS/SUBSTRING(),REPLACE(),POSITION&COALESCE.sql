@@ -42,7 +42,11 @@ FROM employees
 
 -- QUERY 6: Using COALESCE() to handle NULL values
 SELECT department,
-    COALESCE(email, 'No Email') AS "Email"
+COALESCE(email, 'NONE') AS "Email"
+FROM employees
+
+SELECT department,
+COALESCE(email, 'No Email') AS "Email"
 FROM employees
 
 -- QUERY 7: Combining SUBSTRING(), REPLACE(), POSITION(), and COALESCE() in a single query
