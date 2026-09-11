@@ -53,5 +53,10 @@ FROM employees
 GROUP BY department
 
 
+
 SELECT DISTINCT department
+FROM employees
+
+
+SELECT SUBSTRING(email, POSITION ('@' IN email)) AS "Domain"
 FROM employees
