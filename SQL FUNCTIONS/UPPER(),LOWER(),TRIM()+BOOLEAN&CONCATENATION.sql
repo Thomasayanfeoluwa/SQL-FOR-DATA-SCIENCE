@@ -21,6 +21,9 @@ FROM employees
 SELECT first_name || ' ' || last_name AS "Full Name", department, salary
 FROM employees
 
+SELECT UPPER(first_name) || ' ' || last_name AS "Full Name", department, salary
+FROM employees
+
 -- Boolean expressions
 SELECT first_name || ' ' || last_name AS "Full Name", department, (salary > 100000) AS "High Salary"
 FROM employees
