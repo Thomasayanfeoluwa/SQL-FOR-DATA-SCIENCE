@@ -8,5 +8,6 @@ ORDER BY department;
 SELECT department, gender, salary
 FROM employees
 GROUP BY department, gender
-HAVING salary > 90000
+HAVING department = 2
 ORDER BY salary;
+
