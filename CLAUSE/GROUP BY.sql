@@ -75,5 +75,5 @@ ORDER BY COUNT(*) DESC
 
 SELECT gender, region_id, MIN(salary), MAX(salary), ROUND(AVG(salary))
 FROM employees
-GROUP BY 
-ORDER BY gender, region_id
+GROUP BY gender, region_id
+ORDER BY gender, region_id;
