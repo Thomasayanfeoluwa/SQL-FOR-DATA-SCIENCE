@@ -66,7 +66,11 @@ GROUP BY "Email Domain"
 ORDER BY COUNT(*) DESC
 
 
-SELECT SUBSTRING(email, POSITION('@' IN email))
+SELECT SUBSTRING(email, POSITION('@' IN email) +1) as email_domain, COUNT(*)
+FROM employees
+WHERE email IS NOT NULL
+GROUP BY SUBSTRING(email, POSITION('@' IN email) +1)
+ORDER BY COUNT(*) DESC
 
 
 SELECT gender, region_id, MIN(salary) AS min_salary, 
