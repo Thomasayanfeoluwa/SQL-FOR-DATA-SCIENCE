@@ -66,7 +66,7 @@ GROUP BY "Email Domain"
 ORDER BY COUNT(*) DESC
 
 
-
+SELECT SUBSTRING(email, POSITION('@' IN email))
 
 
 SELECT gender, region_id, MIN(salary) AS min_salary, 
