@@ -1,12 +1,18 @@
 SELECT state, 
-    MAX(supply) AS "Largest Fruit Supply"
+    supply AS "Largest Fruit Supply"
 FROM fruits
 GROUP BY state, supply
-ORDER BY supply DESC
+ORDER BY SUM(supply) DESC
 LIMIT 1;
 
 
-SELECT 
+
+SELECT season, MAX(cost_per_unit) "Most Expensive Cost per_unit"
+FROM fruits
+GROUP BY season;
 
 
 
+SELECT state
+FROM fruits
+GROUP BY 
