@@ -27,5 +27,4 @@ HAVING COUNT(season) = 3 OR COUNT(season) = 4;
 
 
 
-
-
+SELECT supply, cost_per_unit
