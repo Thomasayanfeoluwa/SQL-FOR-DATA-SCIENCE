@@ -27,4 +27,8 @@ HAVING COUNT(season) = 3 OR COUNT(season) = 4;
 
 
 
-SELECT supply AS "Most Expensive State", cost_per_unit 
+SELECT SUM(supply * cost_per_unit) AS "Most Expensive", state
+FROM fruits
+GROUP BY state
+ORDER BY "Most Expensive"
+LIMIT 1;
