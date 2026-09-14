@@ -15,6 +15,17 @@ GROUP BY season;
 
 SELECT state
 FROM fruits
-GROUP BY state, anme
-HAVING COUNT(name) > 1
+GROUP BY state, name
+HAVING COUNT(name) > 1;
+
+
+
+SELECT season, COUNT(name) AS "Products Per Season"
+FROM fruits
+GROUP BY season
+HAVING COUNT(season) = 3 OR COUNT(season) = 4;
+
+
+
+
 
