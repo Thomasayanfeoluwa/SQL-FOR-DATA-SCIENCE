@@ -32,3 +32,12 @@ FROM fruits
 GROUP BY state
 ORDER BY "Most Expensive"
 LIMIT 1;
+
+
+
+SELECT COUNT(COALESCE(name, 'SOMEVALUE'))
+FROM fruits;
+
+
+SELECT COUNT(name) AS named_fruits
+FROM fruits;
