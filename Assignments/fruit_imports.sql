@@ -15,4 +15,6 @@ GROUP BY season;
 
 SELECT state
 FROM fruits
-GROUP BY 
+GROUP BY state, anme
+HAVING COUNT(name) > 1
+
