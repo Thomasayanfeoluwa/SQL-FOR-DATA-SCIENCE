@@ -50,3 +50,27 @@ WHERE department = ANY (
         SELECT hire_date
         FROM employees
         WHERE department = 'Maintenance')
+
+SELECT salary, COUNT(*)
+    FROM employees
+    GROUP BY salary
+    ORDER BY COUNT(*) DESC, salary DESC
+
+
+SELECT salary
+FROM (
+    SELECT salary, COUNT(*)
+    FROM employees
+    GROUP BY salary
+    ORDER BY COUNT(*) DESC, salary DESC
+) a
+
+SELECT salary
+FROM employees
+GROUP BY salary
+HAVING COUNT(*) >= ALL (
+    SELECT COUNT(*)
+    FROM employees
+    GROUP BY salary
+)
+ORDER BY salary DESC
