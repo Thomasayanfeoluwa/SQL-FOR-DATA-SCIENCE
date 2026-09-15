@@ -5,6 +5,11 @@ WHERE department NOT IN
     FROM departments);
 
 
-
-
+SELECT *
+FROM employees
+WHERE region_id IN (
+    SELECT region_id
+    FROM regions
+    WHERE country = 'America'
+    );
 
