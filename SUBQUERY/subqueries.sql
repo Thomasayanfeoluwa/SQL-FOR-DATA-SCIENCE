@@ -28,3 +28,25 @@ WHERE region_id > ALL (
     FROM regions
     WHERE country = 'West Africa'
     )
+
+SELECT *
+FROM employees
+WHERE region_id <> ALL (
+    SELECT region_id
+    FROM regions
+    WHERE country = 'West Africa'
+    )
+
+
+
+SELECT *
+FROM employees
+WHERE department = ANY (
+    SELECT department
+    FROM departments
+    WHERE division = 'Kids'
+    )
+    AND hire_date > ALL (
+        SELECT hire_date
+        FROM employees
+        WHERE department = 'Maintenance')
