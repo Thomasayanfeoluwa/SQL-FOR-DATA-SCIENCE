@@ -7,4 +7,8 @@ FROM employees
 
 SELECT department, COUNT(*)
 FROM employees
-WHERE de
+WHERE department IN ('Sport', 'Tools', 'Clothing', 'Computers')
+GROUP BY department
+
+
+SELECT SUM( CASE WHEN salary)
