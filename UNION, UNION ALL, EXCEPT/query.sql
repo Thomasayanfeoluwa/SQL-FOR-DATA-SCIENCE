@@ -48,4 +48,5 @@ GROUP BY department
 UNION ALL
 SELECT 'TOTAL', COUNT(*)
 FROM employees
+LIMIT 100;
 
