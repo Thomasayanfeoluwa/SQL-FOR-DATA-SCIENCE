@@ -73,7 +73,17 @@ HAVING COUNT(*) >= ALL (
     FROM employees
     GROUP BY salary
 )
-ORDER BY salary DESC
+ORDER BY salary DESC;
+
+
+SELECT ROUND(AVG(salary)) AS "Average Salary"
+FROM employees
+WHERE salary NOT IN(
+    (SELECT MIN(salary)
+    FROM employees),
+    (SELECT MAX(salary)
+    FROM employees)
+);
 
 
 
