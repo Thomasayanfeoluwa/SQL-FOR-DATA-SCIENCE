@@ -21,3 +21,6 @@ WHERE id NOT IN (
 SELECT DISTINCT(name), id
 FROM dupes
 GROUP BY name, id;
+
+
+DROP TABLE dupes
