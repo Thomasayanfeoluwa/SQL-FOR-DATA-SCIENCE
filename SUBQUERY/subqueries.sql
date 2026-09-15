@@ -21,6 +21,10 @@ WHERE region_id > ANY (
     WHERE country = 'West Africa'
     )
 
-
 SELECT *
-FROM regions
+FROM employees
+WHERE region_id > ALL (
+    SELECT region_id
+    FROM regions
+    WHERE country = 'West Africa'
+    )
