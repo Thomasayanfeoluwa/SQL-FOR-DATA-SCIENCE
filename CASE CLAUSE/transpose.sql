@@ -11,4 +11,8 @@ WHERE department IN ('Sport', 'Tools', 'Clothing', 'Computers')
 GROUP BY department
 
 
-SELECT SUM( CASE WHEN salary)
+SELECT SUM( CASE WHEN department = 'Sport' THEN 1 ELSE 0 END),
+SELECT SUM( CASE WHEN department = 'Tool' THEN 1 ELSE 0 END),
+SELECT SUM( CASE WHEN department = 'Clothing' THEN 1 ELSE 0 END),
+SELECT SUM( CASE WHEN department = 'Computers' THEN 1 ELSE 0 END),
+FROM departments
