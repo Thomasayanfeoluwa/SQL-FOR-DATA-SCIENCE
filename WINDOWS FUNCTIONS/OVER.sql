@@ -32,3 +32,9 @@ SELECT ROW_NUMBER() OVER() AS row_number,
 FROM employees
 WHERE region_id = 3
 
+SELECT ROW_NUMBER() OVER() AS row_number,
+    first_name, department, region_id,
+    COUNT(*) OVER(PARTITION BY department) AS total_rows
+FROM employees
+WHERE region_id = 3
+
