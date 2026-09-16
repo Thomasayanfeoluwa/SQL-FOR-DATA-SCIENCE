@@ -14,3 +14,7 @@ SELECT first_name, last_name, salary,
     LEAD(salary) OVER(ORDER BY salary DESC) closest_lowest_salary
 FROM employees
 
+SELECT first_name, last_name, salary, department,
+    LEAD(salary) OVER(PARTITION BY department ORDER BY salary DESC) closest_lowest_salary
+FROM employees
+
