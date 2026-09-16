@@ -22,3 +22,12 @@ SELECT first_name, hire_date, department, salary,
     ROWs BETWEEN 3 PRECEDING AND CURRENT ROW)
 FROM employees
 
+SELECT first_name, hire_date, department, salary,
+    SUM(salary) OVER(ORDER BY hire_date
+    ROWs BETWEEN 1000 PRECEDING AND CURRENT ROW)
+FROM employees
+
+SELECT first_name, email, department, salary,
+    RANK() OVER(PARTITION BY department ORDER BY salary DESC)
+FROM employees
+
