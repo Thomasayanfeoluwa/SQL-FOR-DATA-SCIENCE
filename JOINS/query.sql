@@ -83,3 +83,13 @@ WHERE hire_date = (
 )
 ORDER BY hire_date 
 
+SELECT first_name, hire_date, hire_date - 90 "Hire_date-90days"
+FROM employees
+
+SELECT first_name, hire_date, hire_date + 90 "Hire_date+90days"
+FROM employees
+
+SELECT first_name, hire_date, hire_date + 90 "Hire_date+90days"
+FROM employees
+WHERE hire_date BETWEEN hire_date AND hire_date + 90
+
