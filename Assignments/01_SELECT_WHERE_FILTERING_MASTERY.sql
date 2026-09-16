@@ -33,6 +33,7 @@
 
 SET search_path TO public;
 
+/*markdown
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- Q01  Basic projection — select specific columns, not SELECT *
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -40,6 +41,7 @@ SET search_path TO public;
  QUESTION: As a data scientist building a People Analytics dashboard, retrieve
  the employee ID, full name (first + last), department and salary of all
  employees. Alias the concatenated name as "full_name".
+*/
 
  MENTAL MODEL: Always be explicit with columns. SELECT * is a debugging tool,
  never a production query. It pulls all columns even if downstream only uses 3,
