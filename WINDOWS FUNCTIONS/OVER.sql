@@ -17,3 +17,12 @@ SELECT first_name, department,
 SUM(salary) OVER(PARTITION BY department)
 FROM employees
 
+SELECT first_name, department,
+SUM(salary) OVER()
+FROM employees
+
+SELECT first_name, department,
+COUNT(*) OVER(PARTITION BY department) dept_count,
+COUNT(*) OVER(PARTITION BY region_id) reg_count
+FROM employees
+
