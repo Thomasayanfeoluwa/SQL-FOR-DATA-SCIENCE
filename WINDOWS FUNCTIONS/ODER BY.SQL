@@ -31,3 +31,11 @@ SELECT first_name, email, department, salary,
     RANK() OVER(PARTITION BY department ORDER BY salary DESC)
 FROM employees
 
+SELECT *
+FROM (    
+    SELECT first_name, email, department, salary,
+        RANK() OVER(PARTITION BY department ORDER BY salary DESC)
+    FROM employees
+)
+WHERE RANK = 8
+
