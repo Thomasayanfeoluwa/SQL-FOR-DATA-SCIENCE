@@ -99,5 +99,5 @@ SELECT hire_date, salary,
     WHERE e2.hire_date BETWEEN e.hire_date - 90 
         AND e.hire_date) AS "Spending Pattern"
 FROM employees e
-ORDER BY hire_date DESC
+ORDER BY hire_date
 
