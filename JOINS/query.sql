@@ -93,3 +93,11 @@ SELECT first_name, hire_date, hire_date + 90 "Hire_date+90days"
 FROM employees
 WHERE hire_date BETWEEN hire_date AND hire_date + 90
 
+SELECT hire_date, salary,
+    (SELECT SUM(salary)
+    FROM employees e2 
+    WHERE e2.hire_date BETWEEN e.hire_date - 90 
+        AND e.hire_date) AS "Spending Pattern"
+FROM employees e
+ORDER BY hire_date DESC
+
