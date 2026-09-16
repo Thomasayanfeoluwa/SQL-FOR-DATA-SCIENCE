@@ -39,3 +39,15 @@ FROM (
 )
 WHERE RANK = 8
 
+SELECT first_name, email, department, salary,
+    NTILE(5) OVER(PARTITION BY department ORDER BY salary DESC) AS salary_bracket
+FROM employees
+
+SELECT first_name, email, department, salary,
+    FIRST_VALUE(salary) OVER(PARTITION BY department ORDER BY salary DESC) FIRST_VALUE
+FROM employees
+EXCEPT
+SELECT first_name, email, department, salary,
+    MAX(salary) OVER(PARTITION BY department ORDER BY salary DESC) FIRST_VALUE
+FROM employees
+
