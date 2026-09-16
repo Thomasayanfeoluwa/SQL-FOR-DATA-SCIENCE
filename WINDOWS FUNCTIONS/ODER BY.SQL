@@ -51,3 +51,11 @@ SELECT first_name, email, department, salary,
     MAX(salary) OVER(PARTITION BY department ORDER BY salary DESC) FIRST_VALUE
 FROM employees
 
+SELECT first_name, email, department, salary,
+    FIRST_VALUE(salary) OVER(PARTITION BY department ORDER BY first_name) FIRST_VALUE
+FROM employees
+
+SELECT first_name, email, department, salary,
+    NTH_VALUE(salary, 6) OVER(PARTITION BY department ORDER BY first_name) NTH_VALUE
+FROM employees
+
