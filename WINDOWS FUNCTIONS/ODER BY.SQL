@@ -17,3 +17,8 @@ SELECT first_name, hire_date, department, salary,
     ROWs BETWEEN 1 PRECEDING AND CURRENT ROW)
 FROM employees
 
+SELECT first_name, hire_date, department, salary,
+    SUM(salary) OVER(ORDER BY hire_date
+    ROWs BETWEEN 3 PRECEDING AND CURRENT ROW)
+FROM employees
+
