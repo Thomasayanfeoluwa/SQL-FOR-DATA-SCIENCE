@@ -26,3 +26,7 @@ SELECT continent, country, city, SUM(units_sold)
 FROM sales
 GROUP BY ROLLUP(continent, country, city)
 
+SELECT continent, country, city, SUM(units_sold)
+FROM sales
+GROUP BY CUBE(continent, country, city)
+
