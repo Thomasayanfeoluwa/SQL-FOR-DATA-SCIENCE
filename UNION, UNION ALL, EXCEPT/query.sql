@@ -1,4 +1,3 @@
--- Active: 1788967706440@@127.0.0.1@5432@SQL FOR DATA SCIENCE
 SELECT department
 FROM employees
 UNION
@@ -48,5 +47,5 @@ GROUP BY department
 UNION ALL
 SELECT 'TOTAL', COUNT(*)
 FROM employees
-LIMIT 100;
+
 
