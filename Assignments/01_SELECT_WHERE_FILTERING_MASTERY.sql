@@ -284,14 +284,22 @@ WHERE department NOT IN ('Movies')
 -- Q08  NULL handling — IS NULL vs IS NOT NULL
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
- QUESTION: As a data quality analyst, identify employees missing an email
- address. Then find the count. The data team wants both lists.
-
  MENTAL MODEL:
    NULL = NULL → FALSE (because NULL means "unknown", not a value).
    Always use IS NULL / IS NOT NULL, never = NULL or != NULL.
 
+ REAL-WORLD USE: Data pipeline quality gates — before loading to a data
+ warehouse (Snowflake, BigQuery), engineers run IS NULL checks on primary
+ contact fields to flag incomplete records.
+*/
 
+-- QUESTION: As a data quality analyst, identify employees missing an email
+-- address. Then find the count. The data team wants both lists.
+SELECT employee_id, first_name, last_name, department
+FROM employees
+WHERE email IS NULL
+
+SELECT departments, COUNT(*) AS "Depa"
 
 
 
