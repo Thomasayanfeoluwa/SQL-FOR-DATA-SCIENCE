@@ -83,9 +83,6 @@ ORDER BY department, salary DESC;
 -- Q02  WHERE with AND/OR operator precedence — the silent bug
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
- QUESTION: Retrieve all employees in the Beauty department who are in region 3
- OR earn more than $50,000. Return their name, department, region_id, salary.
-
   MENTAL MODEL — THE AND/OR PRECEDENCE TRAP:
    AND binds tighter than OR, just like * binds tighter than + in arithmetic.
    Without parentheses:
@@ -104,6 +101,18 @@ ORDER BY department, salary DESC;
  here is non-negotiable.
 */
 
+--QUESTION: Retrieve all employees in the Beauty department who are in region 3
+--OR earn more than $50,000. Return their name, department, region_id, salary.
+
+SELECT first_name || ' ' || last_name AS "Full Name",
+    department,
+    region_id,
+    salary
+FROM employees
+WHERE department = 'Beauty' 
+    AND (region_id = 3 OR salary > 50000)
+
+ORDER BY salary DESC
 
 
 
