@@ -167,10 +167,10 @@ WHERE gender = 'F'
 
  --QUESTION: Finance wants employees earning more than $150,000 OR all male
  -- employees in Sports. Return first name, hire date, salary.
- SELECT first_name,
+SELECT first_name,
     hire_date, salary
 FROM employees
-
+WHERE salary > 150000 OR  
 
 SELECT first_name, hire_date, salary
 FROM employees
