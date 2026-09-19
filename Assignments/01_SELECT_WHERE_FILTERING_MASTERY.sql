@@ -104,17 +104,16 @@ ORDER BY department, salary DESC;
 --QUESTION: Retrieve all employees in the Beauty department who are in region 3
 --OR earn more than $50,000. Return their name, department, region_id, salary.
 
+-- Buggy (missing parentheses — wrong intent)
 SELECT first_name || ' ' || last_name AS "Full Name",
     department,
     region_id,
     salary
 FROM employees
-WHERE department = 'Beauty' 
-    AND (region_id = 3 OR salary > 50000)
+WHERE (department = 'Beauty' 
+    AND region_id = 3 OR salary > 50000)
 
 ORDER BY salary DESC
-
-
 
 
 -- Buggy (missing parentheses — wrong intent)
@@ -125,28 +124,32 @@ WHERE department = 'Beauty'
     OR salary > 50000;
 
 -- Correct (parentheses enforce intent)
-SELECT first_name, department, region_id, salary
+SELECT first_name || ' ' || last_name AS "Full Name",
+    department,
+    region_id,
+    salary
 FROM employees
 WHERE department = 'Beauty'
-    AND (region_id = 3 OR salary > 50000)
-ORDER BY salary DESC;
+    AND  (region_id = 3 OR salary > 50000)
+ORDER BY salary DESC
 
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- Q03  Multi-condition gender & department filter
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
- QUESTION: HR needs a list of female employees in the Tools department who earn
- more than $100,000. Return their first name and email.
-
- MENTAL MODEL: Stack AND conditions from most-selective to least-selective.
+  MENTAL MODEL: Stack AND conditions from most-selective to least-selective.
  The query planner often evaluates them left to right — filtering on gender
  (50% of rows) first, then department (1/28th), then salary keeps the scan
  narrow at each step.
-
- REAL-WORLD USE: HR compliance reports, Diversity & Inclusion audits,
+  REAL-WORLD USE: HR compliance reports, Diversity & Inclusion audits,
  EEOC government filings.
 */
+
+-- QUESTION: HR needs a list of female employees in the Tools department who earn
+ -- more than $100,000. Return their first name and email.
+
+ 
 
 SELECT first_name, email
 FROM employees
