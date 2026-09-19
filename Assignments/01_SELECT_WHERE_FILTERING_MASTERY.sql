@@ -247,7 +247,6 @@ WHERE department = 'Sports' OR department = 'Clothing' OR department = 'Movies';
 -- Q07  NOT IN — the NULL danger zone
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
- QUESTION: Find employees whose department is NOT 'Movies'. Two approaches.
 
  MENTAL MODEL — THE NOT IN NULL TRAP:
    If the subquery or list passed to NOT IN contains even ONE NULL, the entire
@@ -261,9 +260,19 @@ WHERE department = 'Sports' OR department = 'Clothing' OR department = 'Movies';
  opted out of a specific product tier.
 */
 
- 
+ -- QUESTION: Find employees whose department is NOT 'Movies'. Two approaches.
+SELECT employee_id,
+    first_name, department
+FROM employees
+WHERE department <> 'Movies'
+LIMIT 1000 OFFSET 900;
 
-
+SELECT employee_id,
+    first_name, department
+FROM employees
+WHERE department NOT EXISTS (
+    SELECT 
+)
 
 
 
