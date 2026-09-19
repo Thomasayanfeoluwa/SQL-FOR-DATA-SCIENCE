@@ -181,8 +181,6 @@ WHERE (salary > 150000)
 -- Q05  Date range filtering with BETWEEN
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
- QUESTION: Find all employees hired between Jan 1 2002 and Jan 1 2004.
- Return first name and hire date, sorted by hire date ascending.
  MENTAL MODEL: BETWEEN is inclusive on both ends.
    BETWEEN '2002-01-01' AND '2004-01-01'
    is equivalent to:
@@ -195,7 +193,8 @@ WHERE (salary > 150000)
  highest retention at the 2-year mark.
 */
 
-
+-- QUESTION: Find all employees hired between Jan 1 2002 and Jan 1 2004.
+ -- Return first name and hire date, sorted by hire date ascending.
 
 SELECT first_name, hire_date
 FROM employees
