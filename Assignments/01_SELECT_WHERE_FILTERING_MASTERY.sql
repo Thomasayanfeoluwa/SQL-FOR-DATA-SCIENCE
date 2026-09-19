@@ -1,17 +1,16 @@
+-- ================================================================================
+ -- MODULE 01 — SELECT, WHERE, FILTERING, ORDERING & PROFESSIONAL QUERY DESIGN
+ -- As a Data Scientist at a technology company
+-- ================================================================================
 /*
-================================================================================
- MODULE 01 — SELECT, WHERE, FILTERING, ORDERING & PROFESSIONAL QUERY DESIGN
- As a Data Scientist at a technology company
-================================================================================
-
  SCHEMA CONTEXT
  ─────────────────────────────────────────────────────────────────────────────
- Table: employees
+Table: employees
    employee_id | first_name | last_name | email | hire_date
    department  | gender     | salary    | region_id
+Table: departments     → department (PK), division
+Table: regions         → region_id (PK), region, country
 
- Table: departments     → department (PK), division
- Table: regions         → region_id (PK), region, country
 
  HOW SQL ACTUALLY EXECUTES (Logical Order — memorize this)
  ─────────────────────────────────────────────────────────────────────────────
@@ -24,9 +23,9 @@
    7. ORDER BY
    8. LIMIT / OFFSET
 
- WHY THIS MATTERS: You write SELECT first, but it runs almost last.
- This is why you CANNOT reference a SELECT alias inside a WHERE clause —
- the alias doesn't exist yet when WHERE executes.
+
+WHY THIS MATTERS: You write SELECT first, but it runs almost last.
+This is why you CANNOT reference a SELECT alias inside a WHERE clause — the alias doesn't exist yet when WHERE executes.
 
 ================================================================================
 */
@@ -38,31 +37,35 @@ SET search_path TO public;
 -- Q01  Basic projection — select specific columns, not SELECT *
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
- QUESTION: As a data scientist building a People Analytics dashboard, retrieve
- the employee ID, full name (first + last), department and salary of all
- employees. Alias the concatenated name as "full_name".
-*/
-
- MENTAL MODEL: Always be explicit with columns. SELECT * is a debugging tool,
+MENTAL MODEL: Always be explicit with columns. SELECT * is a debugging tool,
  never a production query. It pulls all columns even if downstream only uses 3,
  wasting I/O and network bandwidth across millions of rows.
 
- CHEAT SHEET:
+CHEAT SHEET:
    SELECT col1, col2 || ' ' || col3 AS alias  -- concatenation
    FROM table_name;
 
- ELEMENTARY vs PROFESSIONAL:
+ELEMENTARY vs PROFESSIONAL:
    ✗ Elementary : SELECT * FROM employees
    ✓ Professional: SELECT explicit columns with aliases
 
- REAL-WORLD USE: Every BI tool query (Tableau, Looker, Power BI) that feeds
+REAL-WORLD USE: Every BI tool query (Tableau, Looker, Power BI) that feeds
  a dashboard selects only the columns the chart needs. At Google, a 1%
  improvement in query cost across 10M daily queries = massive infra savings.
 */
+*/
+
+ -- QUESTION: As a data scientist building a People Analytics dashboard,
+ -- retrieve the employee ID, full name (first + last), department and salary of all employees.
+ -- Alias the concatenated name as "full_name".
 
 -- Elementary
-SELECT *
-FROM employees;
+SELECT employee_id,
+    first_name || ' ' || last_name AS "Full Name",
+    department,
+    salary
+FROM employees
+ORDER BY salary DESC;
 
 -- Professional
 SELECT
@@ -83,7 +86,7 @@ ORDER BY department, salary DESC;
  QUESTION: Retrieve all employees in the Beauty department who are in region 3
  OR earn more than $50,000. Return their name, department, region_id, salary.
 
- MENTAL MODEL — THE AND/OR PRECEDENCE TRAP:
+  MENTAL MODEL — THE AND/OR PRECEDENCE TRAP:
    AND binds tighter than OR, just like * binds tighter than + in arithmetic.
    Without parentheses:
      WHERE department = 'Beauty' AND region_id = 3 OR salary > 50000
@@ -91,15 +94,19 @@ ORDER BY department, salary DESC;
      WHERE (department = 'Beauty' AND region_id = 3) OR (salary > 50000)
    — which returns ALL employees earning > 50k from ANY department. Bug!
 
-   Always use parentheses to make intent explicit.
-
+       Always use parentheses to make intent explicit.
+ 
  CHEAT SHEET:
    WHERE condition_A AND (condition_B OR condition_C)
-
+ 
  REAL-WORLD USE: At Airbnb, a mis-parenthesised WHERE clause in a revenue
  report once caused a 40% revenue overcount for a full quarter. Precision
  here is non-negotiable.
 */
+
+
+
+
 
 -- Buggy (missing parentheses — wrong intent)
 SELECT first_name, department, region_id, salary
