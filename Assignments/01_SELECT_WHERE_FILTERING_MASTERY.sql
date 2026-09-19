@@ -170,13 +170,11 @@ WHERE gender = 'F'
 SELECT first_name,
     hire_date, salary
 FROM employees
-WHERE salary > 150000 OR  
-
-SELECT first_name, hire_date, salary
-FROM employees
-WHERE salary > 150000
-   OR (department = 'Sports' AND gender = 'M')
-ORDER BY salary DESC;
+WHERE (salary > 150000)
+    OR (gender = 'M'
+    AND department = 'Sports'
+    )
+-- ORDER BY salary DESC
 
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -185,20 +183,19 @@ ORDER BY salary DESC;
 /*
  QUESTION: Find all employees hired between Jan 1 2002 and Jan 1 2004.
  Return first name and hire date, sorted by hire date ascending.
-
  MENTAL MODEL: BETWEEN is inclusive on both ends.
    BETWEEN '2002-01-01' AND '2004-01-01'
    is equivalent to:
    >= '2002-01-01' AND <= '2004-01-01'
-
- PROFESSIONAL NOTE: For timestamps, prefer:
+  PROFESSIONAL NOTE: For timestamps, prefer:
    hire_date >= '2002-01-01' AND hire_date < '2004-01-02'
  to avoid edge cases with time components (e.g. 2004-01-01 23:59:59).
-
  REAL-WORLD USE: Cohort analysis — who joined during a specific growth phase?
  Uber uses hire-date cohorts to analyse which engineering hires correlate with
  highest retention at the 2-year mark.
 */
+
+
 
 SELECT first_name, hire_date
 FROM employees
