@@ -295,15 +295,28 @@ WHERE department NOT IN ('Movies')
 
 -- QUESTION: As a data quality analyst, identify employees missing an email
 -- address. Then find the count. The data team wants both lists.
-SELECT employee_id, first_name, last_name, department
+SELECT department, COUNT(*) AS "Department with missing Email"
 FROM employees
 WHERE email IS NULL
+GROUP BY department
+ORDER BY "Department with missing Email" DESC
 
-SELECT departments, COUNT(*) AS "Depa"
-
-
+-- QUESTION: As a data quality analyst, identify employees missing an email
+-- address. Then find the count. The data team wants both lists.
+SELECT department, COUNT(*) AS "Department with Email"
+FROM employees
+WHERE email IS NOT NULL
+GROUP BY department
+ORDER BY "Department with Email" DESC
 
 -- Employees with no email (data quality issue)
+SELECT employee_id, first_name,
+    last_name, department
+FROM employees
+WHERE email IS NULL
+ORDER BY department;
+
+
 SELECT employee_id, first_name, last_name, department
 FROM employees
 WHERE email IS NULL
