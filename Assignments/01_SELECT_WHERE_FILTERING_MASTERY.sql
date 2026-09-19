@@ -243,6 +243,12 @@ SELECT * FROM employees
 WHERE department = 'Sports' OR department = 'Clothing' OR department = 'Movies';
 
 
+SELECT employee_id, first_name, department, salary
+FROM employees
+WHERE department IN ('Sports', 'Clothing', 'Movies', 'Outdoors', 'Toys', 'Tools')
+ORDER BY department, salary DESC;
+
+
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- Q07  NOT IN — the NULL danger zone
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -265,28 +271,13 @@ SELECT employee_id,
     first_name, department
 FROM employees
 WHERE department <> 'Movies'
-LIMIT 1000 OFFSET 900;
+ORDER BY department
+LIMIT 1000 OFFSET 650;
 
 SELECT employee_id,
     first_name, department
 FROM employees
-WHERE department NOT EXISTS (
-    SELECT 
-)
-
-
-
--- Safe single-value exclusion
-SELECT employee_id, first_name, department
-FROM employees
-WHERE department <> 'Movies'
-ORDER BY department;
-
--- Safe multi-value exclusion
-SELECT employee_id, first_name, department
-FROM employees
-WHERE department NOT IN ('Sports', 'Clothing')
-ORDER BY department;
+WHERE department NOT IN ('Movies') 
 
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -300,10 +291,9 @@ ORDER BY department;
    NULL = NULL → FALSE (because NULL means "unknown", not a value).
    Always use IS NULL / IS NOT NULL, never = NULL or != NULL.
 
- REAL-WORLD USE: Data pipeline quality gates — before loading to a data
- warehouse (Snowflake, BigQuery), engineers run IS NULL checks on primary
- contact fields to flag incomplete records.
-*/
+
+
+
 
 -- Employees with no email (data quality issue)
 SELECT employee_id, first_name, last_name, department
