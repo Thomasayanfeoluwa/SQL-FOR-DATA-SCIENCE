@@ -211,21 +211,30 @@ ORDER BY hire_date ASC;
 -- Q06  IN vs multiple OR — readability and index usage
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
- QUESTION: Retrieve all employees who work in Sports, Clothing, Movies,
- Outdoors, Toys, or Tools departments.
 
- MENTAL MODEL:
+
+   MENTAL MODEL:
    IN ('a','b','c') compiles to a hash set lookup — O(1) per row.
    Multiple ORs can disable certain index optimisations.
    Rule: Use IN when checking the SAME column against multiple values.
-
  ELEMENTARY vs PROFESSIONAL:
    ✗ WHERE dept = 'Sports' OR dept = 'Clothing' OR dept = 'Movies' ...
    ✓ WHERE dept IN ('Sports', 'Clothing', 'Movies', ...)
-
- REAL-WORLD USE: Product category filtering in e-commerce analytics, market
+   REAL-WORLD USE: Product category filtering in e-commerce analytics, market
  basket analysis, customer segment filters in CRM reporting.
 */
+
+--  QUESTION: Retrieve all employees who work in Sports, Clothing, Movies,
+ -- Outdoors, Toys, or Tools departments.
+
+ SELECT department
+ FROM employees
+ WHERE (department = 'Sports' 
+    OR department = 'Clothing'
+    OR department = 'Movies'
+    OR department = 'Outdoors'
+    OR department = 'Toys')
+    OR department = 'Tools'
 
 -- Elementary
 SELECT * FROM employees
