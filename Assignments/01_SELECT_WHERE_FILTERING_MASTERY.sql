@@ -113,7 +113,7 @@ FROM employees
 WHERE (department = 'Beauty' 
     AND region_id = 3 OR salary > 50000)
 
-ORDER BY salary DESC
+ORDER BY salary DESC;
 
 
 -- Buggy (missing parentheses — wrong intent)
@@ -131,7 +131,7 @@ SELECT first_name || ' ' || last_name AS "Full Name",
 FROM employees
 WHERE department = 'Beauty'
     AND  (region_id = 3 OR salary > 50000)
-ORDER BY salary DESC
+ORDER BY salary DESC;
 
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -153,7 +153,7 @@ SELECT first_name, email
 FROM employees
 WHERE gender = 'F' 
     AND department = 'Tools'
-    AND salary > 100000
+    AND salary > 100000;
  
 
 
@@ -174,7 +174,7 @@ WHERE (salary > 150000)
     OR (gender = 'M'
     AND department = 'Sports'
     )
--- ORDER BY salary DESC
+-- ORDER BY salary DESC;
 
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -199,7 +199,7 @@ SELECT first_name,
     hire_date
 FROM employees
 WHERE hire_date BETWEEN '2002-01-01' AND '2004-01-01'
-ORDER BY hire_date 
+ORDER BY hire_date;
 
 SELECT first_name, hire_date
 FROM employees
@@ -227,24 +227,20 @@ ORDER BY hire_date ASC;
 --  QUESTION: Retrieve all employees who work in Sports, Clothing, Movies,
  -- Outdoors, Toys, or Tools departments.
 
- SELECT department
+ SELECT employee_id, first_name, department, salary
  FROM employees
- WHERE (department = 'Sports' 
-    OR department = 'Clothing'
-    OR department = 'Movies'
-    OR department = 'Outdoors'
-    OR department = 'Toys')
-    OR department = 'Tools'
+ WHERE department IN ('Sports', 
+    'Clothing',
+    'Movies',
+    'Outdoors',
+    'Toys',
+    'Tools'
+    )
+ORDER BY department, salary;
 
 -- Elementary
 SELECT * FROM employees
 WHERE department = 'Sports' OR department = 'Clothing' OR department = 'Movies';
-
--- Professional
-SELECT employee_id, first_name, department, salary
-FROM employees
-WHERE department IN ('Sports', 'Clothing', 'Movies', 'Outdoors', 'Toys', 'Tools')
-ORDER BY department, salary DESC;
 
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -257,15 +253,19 @@ ORDER BY department, salary DESC;
    If the subquery or list passed to NOT IN contains even ONE NULL, the entire
    result is 0 rows. This is SQL three-valued logic (TRUE/FALSE/UNKNOWN).
    NULL IN any comparison returns UNKNOWN, and NOT UNKNOWN is still UNKNOWN.
-
  SAFE ALTERNATIVES:
    ✓ department <> 'Movies'            -- for single values
    ✓ NOT EXISTS (SELECT 1 ...)         -- for subqueries (NULL-safe)
    ✓ LEFT JOIN ... WHERE right IS NULL -- anti-join pattern
-
- REAL-WORLD USE: Exclusion lists in email marketing, suppressing users who
+   REAL-WORLD USE: Exclusion lists in email marketing, suppressing users who
  opted out of a specific product tier.
 */
+
+ 
+
+
+
+
 
 -- Safe single-value exclusion
 SELECT employee_id, first_name, department
