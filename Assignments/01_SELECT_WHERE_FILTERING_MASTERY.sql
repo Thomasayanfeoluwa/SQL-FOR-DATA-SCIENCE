@@ -316,24 +316,12 @@ FROM employees
 WHERE email IS NULL
 ORDER BY department;
 
-
-SELECT employee_id, first_name, last_name, department
+-- Employees with no email (data quality issue)
+SELECT employee_id, first_name,
+    last_name, department
 FROM employees
 WHERE email IS NULL
-ORDER BY department;
-
--- Count of missing emails by department
-SELECT department, COUNT(*) AS employees_missing_email
-FROM employees
-WHERE email IS NULL
-GROUP BY department
-ORDER BY employees_missing_email DESC;
-
--- Employees with confirmed emails
-SELECT employee_id, first_name, email
-FROM employees
-WHERE email IS NOT NULL
-ORDER BY first_name;
+ORDER BY department
 
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
