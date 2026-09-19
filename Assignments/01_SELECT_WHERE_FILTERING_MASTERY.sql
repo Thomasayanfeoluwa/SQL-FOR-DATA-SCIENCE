@@ -149,13 +149,12 @@ ORDER BY salary DESC
 -- QUESTION: HR needs a list of female employees in the Tools department who earn
  -- more than $100,000. Return their first name and email.
 
- 
-
 SELECT first_name, email
 FROM employees
-WHERE gender     = 'F'
-  AND department = 'Tools'
-  AND salary     > 100000;
+WHERE gender = 'F' 
+    AND department = 'Tools'
+    AND salary > 100000
+ 
 
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
