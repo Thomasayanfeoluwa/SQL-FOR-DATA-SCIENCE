@@ -161,12 +161,16 @@ WHERE gender = 'F'
 -- Q04  Combining OR groups — union of two business cases
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
- QUESTION: Finance wants employees earning more than $150,000 OR all male
- employees in Sports. Return first name, hire date, salary.
-
- MENTAL MODEL: Two independent business cohorts joined with OR.
+  MENTAL MODEL: Two independent business cohorts joined with OR.
  Wrap each cohort in parentheses to keep them logically isolated.
 */
+
+ --QUESTION: Finance wants employees earning more than $150,000 OR all male
+ -- employees in Sports. Return first name, hire date, salary.
+ SELECT first_name,
+    hire_date, salary
+FROM employees
+
 
 SELECT first_name, hire_date, salary
 FROM employees
