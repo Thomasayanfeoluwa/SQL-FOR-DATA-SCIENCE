@@ -193,12 +193,17 @@ WHERE (salary > 150000)
  highest retention at the 2-year mark.
 */
 
--- QUESTION: Find all employees hired between Jan 1 2002 and Jan 1 2004.
+-- QUESTION: Find all employees hired between Jan 1 2003 and Jan 1 2004.
  -- Return first name and hire date, sorted by hire date ascending.
+SELECT first_name,
+    hire_date
+FROM employees
+WHERE hire_date BETWEEN '2002-01-01' AND '2004-01-01'
+ORDER BY hire_date 
 
 SELECT first_name, hire_date
 FROM employees
-WHERE hire_date BETWEEN '2002-01-01' AND '2004-01-01'
+WHERE hire_date >= '2002-01-01' AND hire_date <= '2004-01-01'
 ORDER BY hire_date ASC;
 
 
