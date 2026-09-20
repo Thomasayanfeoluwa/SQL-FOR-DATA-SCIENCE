@@ -334,22 +334,7 @@ ORDER BY department
 
 --  QUESTION: Finance needs all employees earning between $50,000 and $100,000
  -- AND male employees in the Automotive department. Return full profile.
- SELECT employee_id,
-    first_name,
-    last_name,
-    email,
-    hire_date,
-    department,
-    gender,
-    salary,
-    region_id
-FROM employees
-WHERE (salary BETWEEN 50000 AND 100000 
-    AND gender = 'M'
-    AND department = 'Automotive')
-ORDER BY salary DESC;
-
-SELECT
+ SELECT
     employee_id,
     first_name,
     last_name,
@@ -370,18 +355,24 @@ ORDER BY salary DESC;
 -- Q10  ORDER BY — single, multi-column, expression-based
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
- QUESTION: Produce a sorted employee roster:
-   - Primary sort: department A→Z
-   - Secondary sort: salary highest to lowest within each department
-   - Tertiary sort: last name A→Z for salary ties
-
- MENTAL MODEL: ORDER BY accepts multiple comma-separated columns. Each column
+   MENTAL MODEL: ORDER BY accepts multiple comma-separated columns. Each column
  can have its own ASC (default) or DESC modifier independently.
-
- PROFESSIONAL NOTE: ORDER BY without LIMIT on billion-row tables forces a full
+  PROFESSIONAL NOTE: ORDER BY without LIMIT on billion-row tables forces a full
  sort — very expensive. In production pipelines, only sort when the consumer
  needs it (report, API pagination), never in intermediate CTEs.
 */
+
+--QUESTION: Produce a sorted employee roster:
+  -- Primary sort: department A→Z
+   -- Secondary sort: salary highest to lowest within each department
+   -- Tertiary sort: last name A→Z for salary ties
+SELECT employee_id,
+    first_name,
+    last_name,
+    department,
+    salary
+FROM employees
+ORDER BY department ASC, salary DESC, last_name ASC;
 
 SELECT
     employee_id,
