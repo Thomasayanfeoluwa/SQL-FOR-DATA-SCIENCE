@@ -334,7 +334,14 @@ ORDER BY department
 
 --  QUESTION: Finance needs all employees earning between $50,000 and $100,000
  -- AND male employees in the Automotive department. Return full profile.
- SELECT 
+ SELECT employee_id,
+    first_name,
+    last_name,
+    department,
+    gender,
+    salary
+FROM employees
+WHERE (salary BETWEEN 50000 AND 100000 AND gender = 'M' AND department = 'Automative')
 
 SELECT
     employee_id,
