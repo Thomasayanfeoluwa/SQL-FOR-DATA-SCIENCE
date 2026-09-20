@@ -337,44 +337,33 @@ ORDER BY department
  SELECT employee_id,
     first_name,
     last_name,
+    email,
+    hire_date,
     department,
     gender,
-    salary
+    salary,
+    region_id
 FROM employees
 WHERE (salary BETWEEN 50000 AND 100000 
     AND gender = 'M'
-    AND department = 'Automative')
-ORDER BY salary DESC
-
--- SELECT
---     employee_id,
---     first_name,
---     last_name,
---     email,
---     hire_date,
---     department,
---     gender,
---     salary,
---     region_id
--- FROM employees
--- WHERE salary BETWEEN 50000 AND 100000
---   AND gender = 'M'
---   AND department = 'Automotive'
--- ORDER BY salary DESC;
+    AND department = 'Automotive')
+ORDER BY salary DESC;
 
 SELECT
     employee_id,
     first_name,
     last_name,
+    email,
+    hire_date,
     department,
     gender,
-    salary
+    salary,
+    region_id
 FROM employees
-WHERE (salary BETWEEN 50000 AND 100000
-       AND department = 'Automotive'
-       AND gender = 'M')
-   OR (gender = 'F' AND department = 'Toys')
-ORDER BY department, salary DESC;
+WHERE salary BETWEEN 50000 AND 100000
+  AND gender = 'M'
+  AND department = 'Automotive'
+ORDER BY salary DESC;
 
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
