@@ -328,12 +328,13 @@ ORDER BY department
 -- Q09  Salary range with BETWEEN + salary bands
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
- QUESTION: Finance needs all employees earning between $50,000 and $100,000
- AND male employees in the Automotive department. Return full profile.
-
- MENTAL MODEL: Combine a salary BETWEEN range (quantitative filter) with a
+  MENTAL MODEL: Combine a salary BETWEEN range (quantitative filter) with a
  categorical AND condition. Always wrap compound OR blocks in parentheses.
 */
+
+--  QUESTION: Finance needs all employees earning between $50,000 and $100,000
+ -- AND male employees in the Automotive department. Return full profile.
+ SELECT 
 
 SELECT
     employee_id,
