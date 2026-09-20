@@ -341,7 +341,26 @@ ORDER BY department
     gender,
     salary
 FROM employees
-WHERE (salary BETWEEN 50000 AND 100000 AND gender = 'M' AND department = 'Automative')
+WHERE (salary BETWEEN 50000 AND 100000 
+    AND gender = 'M'
+    AND department = 'Automative')
+ORDER BY salary DESC
+
+-- SELECT
+--     employee_id,
+--     first_name,
+--     last_name,
+--     email,
+--     hire_date,
+--     department,
+--     gender,
+--     salary,
+--     region_id
+-- FROM employees
+-- WHERE salary BETWEEN 50000 AND 100000
+--   AND gender = 'M'
+--   AND department = 'Automotive'
+-- ORDER BY salary DESC;
 
 SELECT
     employee_id,
