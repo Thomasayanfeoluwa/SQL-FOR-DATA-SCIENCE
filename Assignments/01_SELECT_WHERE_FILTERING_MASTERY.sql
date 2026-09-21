@@ -451,17 +451,25 @@ ORDER BY headcount DESC;
 -- Q13  Column aliasing and computed columns
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
- QUESTION: Build an employee summary report with:
-   - full_name = first_name + ' ' + last_name (proper casing)
-   - department
-   - annual_salary = salary (column rename for clarity)
-   - is_high_earner = boolean flag: salary > 100000
-   - days_since_hired = today minus hire_date
-
  MENTAL MODEL: Computed columns in SELECT project new derived values without
  touching the underlying table. These are extremely common in analytics layers
  (dbt, views, CTEs).
 */
+
+-- QUESTION: Build an employee summary report with:
+   --full_name = first_name + ' ' + last_name (proper casing)
+   --department
+   --annual_salary = salary (column rename for clarity)
+   --is_high_earner = boolean flag: salary > 100000
+   --days_since_hired = today minus hi  re_date
+
+SELECT first_name || ' ' || last_name   AS full_name,
+   department, salary                   AS annual_salary,
+   (salary > 100000)                    AS is_high_earner,
+   (CURRENT_DATE - hire_date)           AS days_since_hired,
+   EXTRACT(YEAR FROM AGE(hire_date))    AS years_of_service
+FROM employees
+ORDER BY years_of_service DESC 
 
 SELECT
     INITCAP(first_name) || ' ' || INITCAP(last_name)   AS full_name,
@@ -478,60 +486,65 @@ ORDER BY years_of_service DESC;
 -- Q14  LIKE pattern matching — text search without full-text index
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
- QUESTION: Find all departments that contain the letters "oth" anywhere in the
- name. Then find departments that are exactly 4 characters long with "ol" in
- positions 2-3 (e.g. "Tools").
-
  MENTAL MODEL:
    %  → zero or more characters (wildcard)
    _  → exactly one character (positional wildcard)
    LIKE is case-sensitive in PostgreSQL by default.
    Use ILIKE for case-insensitive matching.
-
  CHEAT SHEET:
    LIKE '%oth%'   → contains "oth"
    LIKE 'T%'      → starts with T
    LIKE '%g'      → ends with g
    LIKE '__ol_'   → exactly 5 chars, positions 3-4 are "ol"
-
  REAL-WORLD USE: Search autocomplete, product name fuzzy matching, log
  pattern mining, email domain extraction.
 */
 
-SELECT DISTINCT department
+-- QUESTION: Find all departments that contain the letters "oth" anywhere in the
+-- name. Then find departments that are exactly 4 characters long with "ol" inpositions 2-3 (e.g. "Tools").
+SELECT department
 FROM employees
-WHERE department LIKE '%oth%';
+WHERE department LIKE '%oth%'
 
--- Positional wildcard
-SELECT DISTINCT department
+SELECT department
 FROM employees
-WHERE department LIKE '__ol_';
+WHERE department LIKE '____'
+
+-- Position WildCard
+SELECT department
+FROM employees
+WHERE department LIKE '__ol_'
 
 -- Case-insensitive with ILIKE
 SELECT DISTINCT department
 FROM employees
 WHERE department ILIKE '%computer%';
 
+SELECT first_name
+FROM employees
+WHERE first_name ILIKE '%ThA%'
+
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- Q15  Salary cohort filter — combining BETWEEN, AND, OR, parentheses
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
- QUESTION: Compensation team needs employees who are either:
-   (a) Under age 25 with student_no between 3 and 5, or have student_no = 7,
-       AND age <= 20
-   OR
-   (b) Over age 20 and student_no >= 5
-
  Translate this into the employees table context:
    (a) salary < 60000 with department in (region 3-5) OR region_id = 7
        AND salary <= 60000
    OR
    (b) salary > 80000 AND region_id >= 5
-
  MENTAL MODEL: Treat each OR branch as a separate business rule.
  Write each rule inside parentheses before combining with OR.
+
+  QUESTION: Compensation team needs employees who are either:
+   (a) Under age 25 with student_no between 3 and 5, or have student_no = 7,
+       AND age <= 20
+   OR
+   (b) Over age 20 and student_no >= 5
 */
+
+SELECT 
 
 SELECT
     employee_id,
@@ -543,4 +556,6 @@ FROM employees
 WHERE (salary <= 60000
        AND (region_id BETWEEN 3 AND 5 OR region_id = 7))
    OR (salary > 80000 AND region_id >= 5)
-ORDER BY region_id, salary;
+ORDER BY region_id ASC, salary DESC
+
+
