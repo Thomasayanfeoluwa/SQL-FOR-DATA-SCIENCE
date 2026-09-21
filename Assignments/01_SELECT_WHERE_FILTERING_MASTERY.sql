@@ -415,20 +415,39 @@ LIMIT 5 OFFSET 5
 -- Q12  DISTINCT — deduplication and when NOT to use it
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
- QUESTION: Get a sorted list of all unique departments. Then explain when
- DISTINCT is an anti-pattern.
-
  MENTAL MODEL:
    DISTINCT forces a full sort of the output — O(N log N).
    If you are using DISTINCT to "fix" duplicate rows caused by a JOIN, that is
    a design smell — fix the JOIN, don't paper over it with DISTINCT.
    Legitimate use: quick enumeration of unique categories.
-
  ELEMENTARY vs PROFESSIONAL:
    ✗ SELECT DISTINCT department FROM employees  -- full sort, can be slow
    ✓ SELECT department FROM employees GROUP BY department  -- same result,
        planner may use hash aggregation which is often faster
 */
+
+--  QUESTION: Get a sorted list of all unique departments. Then explain when
+-- DISTINCT is an anti-pattern.
+
+SELECT DISTINCT department AS unique_department
+FROM employees
+ORDER BY department
+
+SELECT department
+FROM employees
+GROUP BY department
+ORDER BY department;
+
+SELECT DISTINCT department, COUNT(*) AS headcount
+FROM employees
+GROUP BY department 
+ORDER BY headcount DESC
+
+-- Distinct departments with count (why GROUP BY wins — you can add aggregates)
+SELECT department, COUNT(*) AS headcount
+FROM employees
+GROUP BY department
+ORDER BY headcount DESC;
 
 -- Distinct departments (correct usage)
 SELECT DISTINCT department AS unique_department
