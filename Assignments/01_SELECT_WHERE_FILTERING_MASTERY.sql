@@ -374,51 +374,41 @@ SELECT employee_id,
 FROM employees
 ORDER BY department ASC, salary DESC, last_name ASC;
 
-SELECT
-    employee_id,
-    first_name,
-    last_name,
-    department,
-    salary
-FROM employees
-ORDER BY
-    department   ASC,
-    salary       DESC,
-    last_name    ASC;
-
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- Q11  LIMIT + OFFSET — pagination pattern
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
- QUESTION: Build an API endpoint returning the top 5 highest-paid employees.
- Then show how to implement pagination (page 2, 5 rows per page).
-
  MENTAL MODEL:
    LIMIT N           → return first N rows
    LIMIT N OFFSET M  → skip M rows, return next N rows
    Page 1: OFFSET 0, Page 2: OFFSET 5, Page 3: OFFSET 10 → OFFSET = (page-1)*size
-
  PROFESSIONAL NOTE: OFFSET-based pagination degrades on large tables because
  the engine scans and discards OFFSET rows every time. Prefer keyset/cursor
  pagination in production:
    WHERE employee_id > :last_seen_id ORDER BY employee_id LIMIT N
-
  REAL-WORLD USE: REST API pagination for employee directories, product
  catalogues, transaction histories.
 */
 
--- Top 5 earners
-SELECT employee_id, first_name, department, salary
-FROM employees
-ORDER BY salary DESC
-LIMIT 5;
+--  QUESTION: Build an API endpoint returning the top 5 highest-paid employees.
+-- Then show how to implement pagination (page 2, 5 rows per page).
 
--- Page 2 (records 6-10)
-SELECT employee_id, first_name, department, salary
+SELECT employee_id,
+    first_name,
+    department,
+    salary
 FROM employees
 ORDER BY salary DESC
-LIMIT 5 OFFSET 5;
+LIMIT 5
+
+SELECT employee_id,
+    first_name,
+    department,
+    salary
+FROM employees
+ORDER BY salary DESC
+LIMIT 5 OFFSET 5
 
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
