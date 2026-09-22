@@ -114,13 +114,14 @@ SELECT
     LENGTH(TRIM('  HELLO THERE  '))     AS trimmed_length
 
 -- Part 1: Prove that LENGTH differs before and after TRIM
-SELECT first_name,
-       department                   AS original_department,
-       LENGTH(department)           AS length_before_trim,
-       TRIM(department)             AS trimmed_department,
-       LENGTH(TRIM(department))     AS length_after_trim
-FROM employees
-ORDER BY length_after_trim DESC;
+SELECT
+    first_name,
+    department                      AS original_department,
+    LENGTH(department)              AS length_before_trim,
+    TRIM(department)                AS trimmed_department,
+    LENGTH(TRIM(department))        AS length_after_trim
+FROM employees;
+
 
 -- Part 2: Query using TRIM in a comparison clause
 SELECT
@@ -138,6 +139,36 @@ SELECT
 FROM employees
 WHERE TRIM(department) = 'Clothing'
 ORDER BY first_name;
+
+SELECT department,
+    LTRIM('Clothing', 'Clo') AS trimmed_department
+FROM employees
+WHERE department = 'Clothing';
+
+SELECT department,
+    RTRIM('Clothing', 'ing') AS trimmed_department
+FROM employees
+WHERE department = 'Clothing';
+
+
+SELECT department
+    TRIM(TRAILING 'ing' FROM 'Clothing') AS trimmed_department
+FROM employees
+WHERE department = 'Clothing'; 
+
+
+SELECT REPLACE('Clothing', 'ing', '') AS replaced_department
+FROM employees;
+
+SELECT REPLACE('Clothing', 'th', '') AS removed_th_clothing
+FROM employees;
+
+
+SELECT 
+    department AS original_department,
+    REPLACE(department, 'th', '') AS modified_department
+FROM employees
+WHERE department LIKE '%th%';
 
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
