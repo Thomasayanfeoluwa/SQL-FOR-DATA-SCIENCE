@@ -3,17 +3,14 @@
  MODULE 02 — STRING FUNCTIONS, BOOLEAN EXPRESSIONS & NULL HANDLING
  As a Data Scientist / Data Engineer
 ================================================================================
-
  FUNCTIONS COVERED:
    UPPER()  LOWER()  INITCAP()  LENGTH()  TRIM()  LTRIM()  RTRIM()
    CONCAT() || (concatenation operator)
    SUBSTRING()  POSITION()  REPLACE()  REGEXP_REPLACE()
    COALESCE()   NULLIF()
    Boolean columns (salary > 100000)  LIKE / ILIKE
-
  SCHEMA CONTEXT: public.employees, public.departments
-
-================================================================================
+ ================================================================================
 */
 
 SET search_path TO public;
@@ -22,24 +19,28 @@ SET search_path TO public;
 -- Q01  Case normalisation — UPPER, LOWER, INITCAP
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
+    MENTAL MODEL:
+   UPPER('hello')    → 'HELLO'
+   LOWER('HELLO')    → 'hello'
+   INITCAP('john')   → 'John'      ← best for display names
+   CHEAT SHEET:
+SELECT UPPER(col), LOWER(col), INITCAP(col) FROM t;
+ REAL-WORLD USE: Every data pipeline that sources from CRM systems (Salesforce,
+ HubSpot) must normalise customer names before loading to a warehouse. 
+ Inconsistent casing causes duplicate rows in GROUP BY.
+
  QUESTION: You are cleaning a raw data export where names were typed
  inconsistently (all-caps, all-lowercase, mixed). Standardise:
    - first_name → Title Case  (INITCAP)
    - last_name  → UPPERCASE   (UPPER)
    - department → lowercase   (LOWER)
-
- MENTAL MODEL:
-   UPPER('hello')    → 'HELLO'
-   LOWER('HELLO')    → 'hello'
-   INITCAP('john')   → 'John'      ← best for display names
-
- CHEAT SHEET:
-   SELECT UPPER(col), LOWER(col), INITCAP(col) FROM t;
-
- REAL-WORLD USE: Every data pipeline that sources from CRM systems (Salesforce,
- HubSpot) must normalise customer names before loading to a warehouse. 
- Inconsistent casing causes duplicate rows in GROUP BY.
 */
+
+SELECT 
+    INITCAP(first_name) AS first_name,
+    UPPER(last_name) AS last_name,
+    LOWER(department) AS department
+FROM employees
 
 SELECT
     INITCAP(first_name)  AS first_name_clean,
@@ -58,9 +59,7 @@ ORDER BY first_name_clean;
  short (< 4 characters) or unusually long (> 12 characters). These are
  potential data entry errors. Return name, name length, and department.
 
- MENTAL MODEL:
-   LENGTH(col) returns character count (NULL for NULL values).
-   Use it in WHERE, SELECT, and ORDER BY.
+
 
  REAL-WORLD USE: Detecting truncated imports, enforcing business rules on
  form inputs, audit trails for data cleaning pipelines.
