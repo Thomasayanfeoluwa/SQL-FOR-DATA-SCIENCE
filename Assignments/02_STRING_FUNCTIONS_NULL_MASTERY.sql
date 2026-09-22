@@ -66,14 +66,14 @@ ORDER BY first_name_clean;
  potential data entry errors. Return name, name length, and department.
 */
 
-SELECT 
+SELECT
     first_name,
-    LENGTH(first_name) AS name_lenght,
+    LENGTH(first_name) AS length_of_name,
     department
 FROM employees
 WHERE LENGTH(first_name) < 4
     OR LENGTH(first_name) > 12
-ORDER BY first_name;
+ORDER BY length_of_name DESC;
 
 SELECT
     first_name,
@@ -89,30 +89,47 @@ ORDER BY name_length ASC;
 -- Q03  TRIM — whitespace removal (the invisible bug)
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
- QUESTION: A data feed is sending department names with leading/trailing
- spaces ('  Clothing  '). Prove that LENGTH differs before and after TRIM,
- then write a query that would use TRIM in a comparison.
-
  MENTAL MODEL:
    TRIM(str)          → removes leading AND trailing spaces
    LTRIM(str)         → removes leading spaces only
    RTRIM(str)         → removes trailing spaces only
    TRIM('xy' FROM str) → removes specific characters
-
    '  Clothing  ' = 'Clothing'  → FALSE (spaces matter in string comparison)
    TRIM('  Clothing  ') = 'Clothing'  → TRUE
-
  REAL-WORLD USE: Source system data from SAP, Oracle ERP, or CSV exports
  routinely contain padding spaces that break JOINs. Always TRIM before joining
  on string keys.
+
+ QUESTION: A data feed is sending department names with leading/trailing
+ spaces ('  Clothing  '). Prove that LENGTH differs before and after TRIM,
+ then write a query that would use TRIM in a comparison.
+
 */
 
 -- Demonstrate the problem
 SELECT
-    '  HELLO THERE  '                           AS raw_value,
-    LENGTH('  HELLO THERE  ')                   AS raw_length,
-    TRIM('  HELLO THERE  ')                     AS trimmed_value,
-    LENGTH(TRIM('  HELLO THERE  '))             AS trimmed_length;
+    '  HELLO THERE  '                   AS raw_value,
+    LENGTH('  HELLO THERE  ')           AS raw_length,
+    TRIM('  HELLO THERE  ')             AS trimmed_value,
+    LENGTH(TRIM('  HELLO THERE  '))     AS trimmed_length
+
+-- Part 1: Prove that LENGTH differs before and after TRIM
+SELECT first_name,
+       department                   AS original_department,
+       LENGTH(department)           AS length_before_trim,
+       TRIM(department)             AS trimmed_department,
+       LENGTH(TRIM(department))     AS length_after_trim
+FROM employees
+ORDER BY length_after_trim DESC;
+
+-- Part 2: Query using TRIM in a comparison clause
+SELECT
+    first_name,
+    department
+FROM employees
+WHERE TRIM(department) = 'Clothing'
+ORDER BY first_name;
+
 
 -- Applied to table — safe JOIN pattern
 SELECT
