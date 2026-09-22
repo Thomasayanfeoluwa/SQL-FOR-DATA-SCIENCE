@@ -40,7 +40,7 @@ SELECT
     INITCAP(first_name) AS first_name,
     UPPER(last_name) AS last_name,
     LOWER(department) AS department
-FROM employees
+FROM employees;
 
 SELECT
     INITCAP(first_name)  AS first_name_clean,
@@ -55,15 +55,25 @@ ORDER BY first_name_clean;
 -- Q02  String length — detecting and filtering anomalies
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 /*
+ MENTAL MODEL:
+   LENGTH(col) returns character count (NULL for NULL values).
+   Use it in WHERE, SELECT, and ORDER BY.
+ REAL-WORLD USE: Detecting truncated imports, enforcing business rules on
+ form inputs, audit trails for data cleaning pipelines.
+
  QUESTION: Data quality task — find employees whose first_name is unusually
  short (< 4 characters) or unusually long (> 12 characters). These are
  potential data entry errors. Return name, name length, and department.
-
-
-
- REAL-WORLD USE: Detecting truncated imports, enforcing business rules on
- form inputs, audit trails for data cleaning pipelines.
 */
+
+SELECT 
+    first_name,
+    LENGTH(first_name) AS name_lenght,
+    department
+FROM employees
+WHERE LENGTH(first_name) < 4
+    OR LENGTH(first_name) > 12
+ORDER BY first_name;
 
 SELECT
     first_name,
