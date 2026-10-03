@@ -28,19 +28,28 @@ SELECT UPPER(col), LOWER(col), INITCAP(col) FROM t;
  REAL-WORLD USE: Every data pipeline that sources from CRM systems (Salesforce,
  HubSpot) must normalise customer names before loading to a warehouse. 
  Inconsistent casing causes duplicate rows in GROUP BY.
-
- QUESTION: You are cleaning a raw data export where names were typed
+ 
+QUESTION: You are cleaning a raw data export where names were typed
  inconsistently (all-caps, all-lowercase, mixed). Standardise:
    - first_name → Title Case  (INITCAP)
    - last_name  → UPPERCASE   (UPPER)
    - department → lowercase   (LOWER)
 */
 
-SELECT 
+-- Active: 1788967706440@@127.0.0.1@5432@SQL FOR DATA SCIENCE
+-- Active: 1788967706440@@127.0.0.1@5432@ecommerce
+SELECT
     INITCAP(first_name) AS first_name,
     UPPER(last_name) AS last_name,
     LOWER(department) AS department
 FROM employees;
+
+SELECT
+    INITCAP(first_name) AS first_name_clean,
+    UPPER(last_name)    AS last_name_clean,
+    LOWER(department)   AS department_clean
+FROM employees
+ORDER BY first_name_clean;
 
 SELECT
     INITCAP(first_name)  AS first_name_clean,
@@ -60,11 +69,12 @@ ORDER BY first_name_clean;
    Use it in WHERE, SELECT, and ORDER BY.
  REAL-WORLD USE: Detecting truncated imports, enforcing business rules on
  form inputs, audit trails for data cleaning pipelines.
-
- QUESTION: Data quality task — find employees whose first_name is unusually
+QUESTION: Data quality task — find employees whose first_name is unusually
  short (< 4 characters) or unusually long (> 12 characters). These are
  potential data entry errors. Return name, name length, and department.
 */
+
+
 
 SELECT
     first_name,
