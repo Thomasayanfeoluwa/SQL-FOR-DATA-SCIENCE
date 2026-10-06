@@ -42,3 +42,11 @@ LIMIT 5;
 SELECT sales, 2 AS promotional_discount
   FROM orders
  LIMIT 5;
+
+
+SELECT city || ", " || state_province || " " || postal_code AS "address",
+	sales,
+	ROUND(sales * 0.07, 2) AS sales_tax,
+	4.99 AS shipping_cost,
+	ROUND(sales + 4.99 + sales * 0.07, 2) AS total_cost
+FROM orders;
