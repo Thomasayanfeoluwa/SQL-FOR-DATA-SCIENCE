@@ -64,3 +64,9 @@ SELECT order_id,
 	ROUND(sales / quantity, 2) AS "price_per_unit"
 FROM orders
 LIMIT 10
+
+SELECT order_id,
+	region, state_province,
+	"Superstore " || city AS "local_store"
+FROM orders
+LIMIT 10
