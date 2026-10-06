@@ -50,3 +50,10 @@ SELECT city || ", " || state_province || " " || postal_code AS "address",
 	4.99 AS shipping_cost,
 	ROUND(sales + 4.99 + sales * 0.07, 2) AS total_cost
 FROM orders;
+
+
+SELECT order_id, 
+	sales, profit,
+	ROUND(profit / sales, 2) AS "profit_margin"
+FROM orders
+LIMIT 8;
