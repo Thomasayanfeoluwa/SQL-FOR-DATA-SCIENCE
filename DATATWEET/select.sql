@@ -57,3 +57,10 @@ SELECT order_id,
 	ROUND(profit / sales, 2) AS "profit_margin"
 FROM orders
 LIMIT 8;
+
+
+SELECT order_id,
+	sales, quantity,
+	ROUND(sales / quantity, 2) AS "price_per_unit"
+FROM orders
+LIMIT 10
