@@ -102,3 +102,10 @@ FROM orders
 WHERE profit < -1000
 ORDER BY profit DESC
 
+
+SELECT order_id, product_id,
+	ROUND(sales * 0.10, 2) AS sales_tax
+FROM orders
+WHERE ROUND(sales * 0.10, 2) BETWEEN 1 AND 2;
+
+
