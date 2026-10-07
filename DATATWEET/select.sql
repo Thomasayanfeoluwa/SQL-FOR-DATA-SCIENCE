@@ -86,3 +86,11 @@ FROM orders
 WHERE quantity BETWEEN 2 AND 4
 
 
+SELECT order_id,
+	category, sub_category,
+	product_name,
+	sales, discount
+FROM orders
+WHERE discount IN (0.15, 0.32, 0.45);
+
+
