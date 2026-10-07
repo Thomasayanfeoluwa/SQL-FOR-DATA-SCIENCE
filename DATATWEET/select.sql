@@ -94,3 +94,11 @@ FROM orders
 WHERE discount IN (0.15, 0.32, 0.45);
 
 
+SELECT order_id, 
+	product_name, 
+	sales, discount,
+	profit
+FROM orders
+WHERE profit < -1000
+ORDER BY profit DESC
+
