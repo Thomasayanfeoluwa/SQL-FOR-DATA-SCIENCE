@@ -72,3 +72,17 @@ FROM orders
 LIMIT 10
 
 
+SELECT order_id,
+	sub_category,
+	product_name,
+	sales/quantity AS price_per_unit
+FROM orders
+WHERE sales / quantity < 0.50;
+
+SELECT order_id, 
+	product_name,
+	quantity
+FROM orders
+WHERE quantity BETWEEN 2 AND 4
+
+
