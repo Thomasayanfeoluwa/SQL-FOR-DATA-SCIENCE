@@ -70,3 +70,5 @@ SELECT order_id,
 	"Superstore " || city AS "local_store"
 FROM orders
 LIMIT 10
+
+
